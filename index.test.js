@@ -103,14 +103,35 @@ describe('[Exercise 5] Seasons', () => {
 })
 
 describe('[Exercise 6] Car', () => {
-  let focus
+  let santaFe
   beforeEach(() => {
-    focus = new utils.Car('focus', 20, 30) // each test must start with a fresh car
+    santaFe = new utils.Car('santaFe', 16, 24) // each test must start with a fresh car
   })
-  // test('[15] driving the car returns the updated odometer', () => {})
-  // test('[16] driving the car uses gas', () => {})
-  // test('[17] refueling allows to keep driving', () => {})
-  // test('[18] adding fuel to a full tank has no effect', () => {})
+  test('[15] driving the car returns the updated odometer', () => {
+    expect(santaFe.drive(130)).toBe(130)
+    expect(santaFe.drive(50)).toBe(180)
+    expect(santaFe.drive(180)).toBe(360)
+    // expect(santaFe.drive(40)).toBe(380)
+    
+  })
+  test('[16] driving the car uses gas', () => {
+    santaFe.drive(360)
+    expect(santaFe.tank).toBe(1)
+    santaFe.drive(24)
+    expect(santaFe.tank).toBe(0)
+    santaFe.drive(400)
+    expect(santaFe.tank).toBe(0)
+  })
+  test('[17] refueling allows to keep driving', () => {
+    santaFe.drive(360)
+    santaFe.refuel(14)
+    expect(santaFe.tank).toBe(15)
+    expect(santaFe.drive(336)).toBe(696)
+  })
+  test('[18] adding fuel to a full tank has no effect', () => {
+    santaFe.refuel(14)
+    expect(santaFe.tank).toBe(16)
+  })
 })
 
 describe('[Exercise 7] isEvenNumberAsync', () => {
